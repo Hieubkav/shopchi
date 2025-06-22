@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShoesStore - Cửa hàng giày thời trang</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+    
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ec4899',
+                        secondary: '#f97316',
+                        accent: '#8b5cf6',
+                        dark: '#000000',
+                        'dark-light': '#111111',
+                        'dark-lighter': '#1a1a1a',
+                        'dark-card': '#0a0a0a',
+                        pink: {
+                            400: '#f472b6',
+                            500: '#ec4899',
+                            600: '#db2777',
+                            700: '#be185d'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark text-white font-sans overflow-x-hidden relative">
+    <!-- Background Effects -->
+    <div class="fixed inset-0 pointer-events-none z-0">
+        <!-- Animated Background Particles -->
+        <div class="absolute inset-0 bg-gradient-to-br from-dark via-dark-light to-dark opacity-90"></div>
+        <div class="floating-particles"></div>
+        <div class="gradient-orbs"></div>
+    </div>
+
+    <!-- Footprint Container -->
+    <div id="footprintContainer" class="fixed inset-0 pointer-events-none z-10"></div>
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-dark/90 backdrop-blur-xl border-b border-pink-900/30 neumorphic-header">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-lg overflow-hidden neumorphic-logo">
+                        <img src="https://scontent.fsgn5-9.fna.fbcdn.net/v/t39.30808-6/245367840_3033315620255790_5319637626483103583_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=AAKr75QBZykQ7kNvwFcTYlC&_nc_oc=AdlDiRS4coZMOHfVMjS1ExAl2e6AF8pIo-zIOF3HKuIF7lfuHMEyh4tS1-VtiSzidBo&_nc_zt=23&_nc_ht=scontent.fsgn5-9.fna&_nc_gid=JT55T0WCA1DGzbusUCBluw&oh=00_AfOTmEdSbjwRJjlgVw11jaZJ5V9fIo4uHVzOijhY8EvsFg&oe=685DBB13" alt="Shopchi Giày Dép" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-xl font-bold text-primary">Shopchi</span>
+                        <span class="text-sm text-gray-400">Giày Dép</span>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="hover:text-primary transition-colors">Trang chủ</a>
+                    <a href="#products" class="hover:text-primary transition-colors">Sản phẩm</a>
+                    <a href="#brands" class="hover:text-primary transition-colors">Thương hiệu</a>
+                    <a href="#sale" class="hover:text-primary transition-colors">Khuyến mãi</a>
+                    <a href="about.html" class="hover:text-primary transition-colors">Giới thiệu</a>
+                    <a href="contact.html" class="hover:text-primary transition-colors">Liên hệ</a>
+                </div>
+                
+                <!-- Utility Icons -->
+                <div class="flex items-center space-x-4">
+                    <button id="searchBtn" class="neumorphic-btn p-2 rounded-lg">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button id="wishlistBtn" class="neumorphic-btn p-2 rounded-lg relative">
+                        <i class="fas fa-heart"></i>
+                        <span id="wishlistCount" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </button>
+                    <button id="cartBtn" class="neumorphic-btn p-2 rounded-lg relative">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span id="cartCount" class="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </button>
+                    <button id="mobileMenuBtn" class="md:hidden neumorphic-btn p-2 rounded-lg">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden mt-4 hidden">
+                <div class="glass-panel rounded-lg p-4 space-y-3">
+                    <a href="#" class="block hover:text-primary transition-colors">Trang chủ</a>
+                    <a href="#products" class="block hover:text-primary transition-colors">Sản phẩm</a>
+                    <a href="#brands" class="block hover:text-primary transition-colors">Thương hiệu</a>
+                    <a href="#sale" class="block hover:text-primary transition-colors">Khuyến mãi</a>
+                    <a href="about.html" class="block hover:text-primary transition-colors">Giới thiệu</a>
+                    <a href="contact.html" class="block hover:text-primary transition-colors">Liên hệ</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-20 min-h-screen flex items-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right">
+                    <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                        Bước đi <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">phong cách</span>
+                    </h1>
+                    <p class="text-xl text-gray-300 mb-8">
+                        Chuyên mua bán giày-dép thời trang cho mọi lứa tuổi với chất lượng cao và giá cả hợp lý.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="neumorphic-btn bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-lg font-semibold hover:shadow-lg transition-all">
+                            Mua ngay
+                        </button>
+                        <button class="neumorphic-btn border border-gray-600 px-8 py-4 rounded-lg font-semibold hover:border-primary transition-all">
+                            Xem bộ sưu tập
+                        </button>
+                    </div>
+                </div>
+                <div data-aos="fade-left" class="relative">
+                    <div class="swiper heroSwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="neumorphic-card p-8 rounded-2xl">
+                                    <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500&h=500&fit=crop" alt="Giày thể thao" class="w-full h-80 object-cover rounded-lg">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="neumorphic-card p-8 rounded-2xl">
+                                    <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=500&h=500&fit=crop" alt="Giày cao gót" class="w-full h-80 object-cover rounded-lg">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="neumorphic-card p-8 rounded-2xl">
+                                    <img src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=500&h=500&fit=crop" alt="Giày boot" class="w-full h-80 object-cover rounded-lg">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section id="products" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-bold mb-4">Sản phẩm nổi bật</h2>
+                <p class="text-gray-400 text-lg">Những đôi giày được yêu thích nhất</p>
+            </div>
+            
+            <!-- Filter Bar -->
+            <div class="glass-panel rounded-lg p-6 mb-12" data-aos="fade-up">
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <div class="flex flex-wrap gap-4">
+                        <select id="categoryFilter" class="neumorphic-input bg-dark-light border border-gray-600 rounded-lg px-4 py-2">
+                            <option value="">Tất cả danh mục</option>
+                            <option value="sneakers">Giày thể thao</option>
+                            <option value="boots">Giày boot</option>
+                            <option value="heels">Giày cao gót</option>
+                            <option value="casual">Giày thường</option>
+                        </select>
+                        <select id="brandFilter" class="neumorphic-input bg-dark-light border border-gray-600 rounded-lg px-4 py-2">
+                            <option value="">Tất cả thương hiệu</option>
+                            <option value="nike">Nike</option>
+                            <option value="adidas">Adidas</option>
+                            <option value="puma">Puma</option>
+                            <option value="converse">Converse</option>
+                        </select>
+                        <select id="priceFilter" class="neumorphic-input bg-dark-light border border-gray-600 rounded-lg px-4 py-2">
+                            <option value="">Tất cả giá</option>
+                            <option value="0-500000">Dưới 500k</option>
+                            <option value="500000-1000000">500k - 1tr</option>
+                            <option value="1000000-2000000">1tr - 2tr</option>
+                            <option value="2000000-999999999">Trên 2tr</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm..." class="neumorphic-input bg-dark-light border border-gray-600 rounded-lg px-4 py-2 w-64">
+                        <button id="clearFilters" class="neumorphic-btn px-4 py-2 rounded-lg text-sm">
+                            <i class="fas fa-times mr-2"></i>Xóa bộ lọc
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Products Grid -->
+            <div id="productsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Products will be loaded here by JavaScript -->
+            </div>
+            
+            <!-- Load More Button -->
+            <div class="text-center mt-12">
+                <button id="loadMoreBtn" class="neumorphic-btn bg-gradient-to-r from-primary to-secondary text-white px-8 py-3 rounded-lg font-semibold">
+                    Xem thêm sản phẩm
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brands Section -->
+    <section id="brands" class="py-20 bg-dark-light/50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-bold mb-4">Shopchi Giày Dép</h2>
+                <p class="text-gray-400 text-lg">Chuyên mua bán giày-dép thời trang cho mọi lứa tuổi</p>
+                <p class="text-primary text-sm mt-2">📍 Ngai Giao, Vietnam</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="neumorphic-card p-12 rounded-2xl text-center brand-showcase" data-aos="fade-up">
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <!-- Logo lớn -->
+                        <div class="flex-shrink-0">
+                            <div class="w-32 h-32 rounded-2xl overflow-hidden neumorphic-logo-large">
+                                <img src="https://scontent.fsgn5-9.fna.fbcdn.net/v/t39.30808-6/245367840_3033315620255790_5319637626483103583_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=AAKr75QBZykQ7kNvwFcTYlC&_nc_oc=AdlDiRS4coZMOHfVMjS1ExAl2e6AF8pIo-zIOF3HKuIF7lfuHMEyh4tS1-VtiSzidBo&_nc_zt=23&_nc_ht=scontent.fsgn5-9.fna&_nc_gid=JT55T0WCA1DGzbusUCBluw&oh=00_AfOTmEdSbjwRJjlgVw11jaZJ5V9fIo4uHVzOijhY8EvsFg&oe=685DBB13" alt="Shopchi Giày Dép" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+
+                        <!-- Thông tin -->
+                        <div class="flex-1 text-left">
+                            <h3 class="text-4xl font-bold text-primary mb-4">Shopchi Giày Dép</h3>
+                            <p class="text-xl text-gray-300 mb-4">Chuyên mua bán giày-dép thời trang cho mọi lứa tuổi</p>
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-map-marker-alt text-primary"></i>
+                                    <span class="text-gray-300">Ngai Giao, Vietnam</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-shoe-prints text-primary"></i>
+                                    <span class="text-gray-300">Giày dép chất lượng cao</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-users text-primary"></i>
+                                    <span class="text-gray-300">Phục vụ mọi lứa tuổi</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-heart text-primary"></i>
+                                    <span class="text-gray-300">Uy tín - Chất lượng - Giá tốt</span>
+                                </div>
+                            </div>
+
+                            <!-- Social Links -->
+                            <div class="flex gap-4 mt-6">
+                                <a href="#" class="neumorphic-btn p-3 rounded-lg hover:text-primary transition-colors">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="neumorphic-btn p-3 rounded-lg hover:text-primary transition-colors">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="neumorphic-btn p-3 rounded-lg hover:text-primary transition-colors">
+                                    <i class="fas fa-phone"></i>
+                                </a>
+                                <a href="#" class="neumorphic-btn p-3 rounded-lg hover:text-primary transition-colors">
+                                    <i class="fab fa-zalo"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="glass-panel rounded-2xl p-12 text-center" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-4">Đăng ký nhận tin</h2>
+                <p class="text-gray-400 mb-8">Nhận thông tin về sản phẩm mới và ưu đãi đặc biệt</p>
+                <div class="max-w-md mx-auto flex gap-4">
+                    <input type="email" placeholder="Email của bạn" class="neumorphic-input flex-1 bg-dark-light border border-gray-600 rounded-lg px-4 py-3">
+                    <button class="neumorphic-btn bg-gradient-to-r from-primary to-secondary text-white px-6 py-3 rounded-lg font-semibold">
+                        Đăng ký
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-light py-12 border-t border-pink-900/50 relative z-20 neumorphic-footer">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg overflow-hidden neumorphic-logo">
+                            <img src="https://scontent.fsgn5-9.fna.fbcdn.net/v/t39.30808-6/245367840_3033315620255790_5319637626483103583_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=AAKr75QBZykQ7kNvwFcTYlC&_nc_oc=AdlDiRS4coZMOHfVMjS1ExAl2e6AF8pIo-zIOF3HKuIF7lfuHMEyh4tS1-VtiSzidBo&_nc_zt=23&_nc_ht=scontent.fsgn5-9.fna&_nc_gid=JT55T0WCA1DGzbusUCBluw&oh=00_AfOTmEdSbjwRJjlgVw11jaZJ5V9fIo4uHVzOijhY8EvsFg&oe=685DBB13" alt="Shopchi Giày Dép" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-lg font-bold text-primary">Shopchi</span>
+                            <span class="text-sm text-gray-400">Giày Dép</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400">Chuyên mua bán giày-dép thời trang cho mọi lứa tuổi tại Ngai Giao, Vietnam. Uy tín - Chất lượng - Giá tốt.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Liên kết</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-primary transition-colors">Trang chủ</a></li>
+                        <li><a href="#products" class="hover:text-primary transition-colors">Sản phẩm</a></li>
+                        <li><a href="about.html" class="hover:text-primary transition-colors">Giới thiệu</a></li>
+                        <li><a href="contact.html" class="hover:text-primary transition-colors">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Hỗ trợ</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-primary transition-colors">Chính sách bảo hành</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Hướng dẫn đổi trả</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Câu hỏi thường gặp</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Chính sách bảo mật</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Theo dõi chúng tôi</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="neumorphic-btn p-3 rounded-lg hover:text-primary transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="neumorphic-btn p-3 rounded-lg hover:text-primary transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="neumorphic-btn p-3 rounded-lg hover:text-primary transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="neumorphic-btn p-3 rounded-lg hover:text-primary transition-colors">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 ShoesStore. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div id="cartSidebar" class="fixed top-0 right-0 h-full w-96 bg-dark/95 backdrop-blur-md transform translate-x-full transition-transform duration-300 z-50 border-l border-gray-800">
+        <div class="p-6 h-full flex flex-col">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold">Giỏ hàng</h2>
+                <button id="closeCartBtn" class="neumorphic-btn p-2 rounded-lg">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="cartItems" class="flex-1 overflow-y-auto space-y-4">
+                <!-- Cart items will be loaded here -->
+            </div>
+            <div class="border-t border-gray-800 pt-4">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-lg font-semibold">Tổng cộng:</span>
+                    <span id="cartTotal" class="text-xl font-bold text-primary">0đ</span>
+                </div>
+                <button id="checkoutBtn" class="w-full neumorphic-btn bg-gradient-to-r from-primary to-secondary text-white py-3 rounded-lg font-semibold">
+                    Thanh toán
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div id="productModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+        <div class="glass-panel rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold">Chi tiết sản phẩm</h2>
+                    <button id="closeModalBtn" class="neumorphic-btn p-2 rounded-lg">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div id="modalContent">
+                    <!-- Modal content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Modal -->
+    <div id="searchModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+        <div class="glass-panel rounded-2xl max-w-2xl w-full">
+            <div class="p-6">
+                <div class="flex items-center gap-4 mb-6">
+                    <input type="text" id="modalSearchInput" placeholder="Tìm kiếm sản phẩm..." class="flex-1 neumorphic-input bg-dark-light border border-gray-600 rounded-lg px-4 py-3">
+                    <button id="closeSearchBtn" class="neumorphic-btn p-3 rounded-lg">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div id="searchResults" class="space-y-4 max-h-96 overflow-y-auto">
+                    <!-- Search results will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50 flex items-center justify-center">
+        <div class="glass-panel rounded-2xl p-8 text-center">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+            <p class="text-lg">Đang tải...</p>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="fixed top-20 right-4 z-50 space-y-2">
+        <!-- Toast notifications will be added here -->
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
