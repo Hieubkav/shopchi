@@ -1,5 +1,35 @@
 /* Enhanced Neumorphism and Glassmorphism Effects with Black-Pink Theme */
 
+/* CRITICAL: Prevent horizontal scroll at all costs */
+html {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* Account for fixed header */
+}
+
+body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    position: relative;
+}
+
+/* Utility classes for overflow prevention */
+.no-overflow {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+}
+
+.safe-width {
+    max-width: calc(100vw - 2rem) !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mobile-safe {
+    max-width: calc(100vw - 1rem) !important;
+}
+
 /* Enhanced Neumorphic Button */
 .neumorphic-btn {
     background: linear-gradient(145deg, #1a1a1a, #000000);
@@ -307,25 +337,189 @@
     box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Enhanced Responsive Design */
+
+/* Mobile First - Extra Small devices (phones, 320px and up) */
+@media (max-width: 480px) {
+    /* Header adjustments */
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    /* Hero section mobile */
+    .text-5xl {
+        font-size: 2.5rem !important;
+        line-height: 1.2;
+    }
+
+    .text-7xl {
+        font-size: 3rem !important;
+        line-height: 1.1;
+    }
+
+    /* Reduce shadows for better performance */
     .neumorphic-card {
-        box-shadow: 
-            8px 8px 16px #0a0f1a,
-            -8px -8px 16px #2a3441;
+        box-shadow:
+            6px 6px 12px rgba(0, 0, 0, 0.8),
+            -6px -6px 12px rgba(40, 40, 40, 0.3);
+        padding: 1rem;
     }
-    
+
     .neumorphic-btn {
-        box-shadow: 
-            6px 6px 12px #0a0f1a,
-            -6px -6px 12px #2a3441;
+        box-shadow:
+            4px 4px 8px rgba(0, 0, 0, 0.8),
+            -4px -4px 8px rgba(40, 40, 40, 0.3);
+        padding: 0.75rem 1.5rem;
     }
-    
+
+    /* Product grid mobile */
+    .grid-cols-1 {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    /* Filter bar mobile */
+    .flex-wrap {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .w-64 {
+        width: 100% !important;
+    }
+
+    /* Cart sidebar mobile */
+    .w-96 {
+        width: 100% !important;
+    }
+
+    /* Modal mobile */
+    .max-w-4xl {
+        max-width: 95vw !important;
+        margin: 1rem;
+    }
+
+    .max-w-2xl {
+        max-width: 95vw !important;
+        margin: 1rem;
+    }
+
+    /* Footer mobile */
+    .grid-cols-4 {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        gap: 2rem;
+        text-align: center;
+    }
+
+    /* Disable hover effects on mobile */
     .product-card:hover {
         transform: none;
-        box-shadow: 
-            12px 12px 24px #0a0f1a,
-            -12px -12px 24px #2a3441;
+        box-shadow:
+            8px 8px 16px rgba(0, 0, 0, 0.8),
+            -8px -8px 16px rgba(40, 40, 40, 0.3);
+    }
+
+    .neumorphic-btn:hover {
+        transform: none;
+    }
+
+    .neumorphic-card:hover {
+        transform: none;
+    }
+
+    /* Touch-friendly buttons */
+    .neumorphic-btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* Swiper mobile */
+    .swiper-slide {
+        padding: 0.5rem;
+    }
+
+    .h-80 {
+        height: 12rem !important;
+    }
+}
+
+/* Small devices (landscape phones, 481px and up) */
+@media (min-width: 481px) and (max-width: 768px) {
+    .text-5xl {
+        font-size: 3rem !important;
+    }
+
+    .text-7xl {
+        font-size: 4rem !important;
+    }
+
+    .grid-cols-1 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .neumorphic-card {
+        box-shadow:
+            8px 8px 16px rgba(0, 0, 0, 0.8),
+            -8px -8px 16px rgba(40, 40, 40, 0.3);
+    }
+
+    .neumorphic-btn {
+        box-shadow:
+            6px 6px 12px rgba(0, 0, 0, 0.8),
+            -6px -6px 12px rgba(40, 40, 40, 0.3);
+    }
+
+    .product-card:hover {
+        transform: translateY(-2px);
+        box-shadow:
+            12px 12px 24px rgba(0, 0, 0, 0.8),
+            -12px -12px 24px rgba(40, 40, 40, 0.3);
+    }
+
+    .w-96 {
+        width: 24rem !important;
+    }
+
+    .grid-cols-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Medium devices (tablets, 769px and up) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .grid-cols-1 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .lg\\:grid-cols-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    .xl\\:grid-cols-4 {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+
+    .text-7xl {
+        font-size: 5rem !important;
+    }
+
+    .grid-cols-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Large devices (desktops, 1025px and up) */
+@media (min-width: 1025px) {
+    .product-card:hover {
+        transform: translateY(-4px) scale(1.02);
+    }
+
+    .neumorphic-card:hover {
+        transform: translateY(-4px);
+    }
+
+    .neumorphic-btn:hover {
+        transform: translateY(-2px);
     }
 }
 
@@ -501,23 +695,46 @@
     filter: blur(60px);
 }
 
-/* Footprint Effect */
+/* Footprint Effect - Simple and Visible */
 .footprint {
-    position: absolute;
-    width: 30px;
-    height: 40px;
+    position: fixed !important;
+    width: 50px;
+    height: 50px;
     pointer-events: none;
-    z-index: 10;
+    z-index: 9999 !important;
     animation: footprintFade 3s ease-out forwards;
+    user-select: none;
+    display: block !important;
+    visibility: visible !important;
+    background: #ec4899 !important;
+    border-radius: 50%;
+    box-shadow:
+        0 0 30px #ec4899,
+        0 0 60px #f472b6,
+        inset 0 0 20px rgba(255, 255, 255, 0.3);
+    border: 3px solid #f472b6;
 }
 
 .footprint::before {
-    content: '👣';
+    content: '🦶';
     position: absolute;
-    font-size: 24px;
-    color: rgba(236, 72, 153, 0.8);
-    filter: drop-shadow(0 0 10px rgba(236, 72, 153, 0.5));
-    animation: footprintGlow 3s ease-out forwards;
+    font-size: 30px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.footprint::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(236, 72, 153, 0.8) 0%, rgba(244, 114, 182, 0.4) 50%, transparent 100%);
+    border-radius: 50%;
+    animation: footprintPulse 3s ease-out forwards;
 }
 
 @media (max-width: 768px) {
@@ -562,28 +779,39 @@
 
 @keyframes footprintFade {
     0% {
-        opacity: 1;
-        transform: scale(0.8);
+        opacity: 0;
+        transform: scale(0.3);
     }
-    20% {
+    15% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+    30% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    85% {
         opacity: 1;
         transform: scale(1);
     }
     100% {
         opacity: 0;
-        transform: scale(1.2);
+        transform: scale(0.8);
     }
 }
 
-@keyframes footprintGlow {
+@keyframes footprintPulse {
     0% {
-        filter: drop-shadow(0 0 10px rgba(236, 72, 153, 0.8));
+        transform: scale(0);
+        opacity: 1;
     }
     50% {
-        filter: drop-shadow(0 0 20px rgba(236, 72, 153, 0.6));
+        transform: scale(2);
+        opacity: 0.5;
     }
     100% {
-        filter: drop-shadow(0 0 5px rgba(236, 72, 153, 0.2));
+        transform: scale(3);
+        opacity: 0;
     }
 }
 
@@ -1099,4 +1327,363 @@
         inset 4px 4px 8px rgba(255, 255, 255, 0.08),
         inset -4px -4px 8px rgba(0, 0, 0, 0.6),
         0 0 50px rgba(236, 72, 153, 0.4);
+}
+
+/* Critical Overflow Prevention - Must be at top */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden;
+    max-width: 100vw;
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    position: relative;
+}
+
+.container {
+    max-width: 100% !important;
+    overflow-x: hidden;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* Prevent any element from causing horizontal scroll */
+*, *::before, *::after {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+img, video, iframe, embed, object {
+    max-width: 100% !important;
+    height: auto;
+}
+
+/* Flex and Grid containers */
+.flex, .grid {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/* Form elements */
+input, select, textarea, button {
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+/* Text elements */
+h1, h2, h3, h4, h5, h6, p, span, div, a {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    max-width: 100%;
+}
+
+/* Specific width classes that might cause issues */
+.w-96 {
+    max-width: calc(100vw - 2rem) !important;
+}
+
+.max-w-4xl, .max-w-2xl, .max-w-6xl {
+    max-width: calc(100vw - 2rem) !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Fixed elements */
+.fixed {
+    max-width: 100vw;
+}
+
+/* Swiper specific fixes */
+.swiper {
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.swiper-slide {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/* Additional Mobile Optimizations */
+@media (max-width: 480px) {
+    /* Prevent horizontal overflow */
+    body {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+    }
+
+    .container {
+        max-width: 100% !important;
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    /* Reduce animation complexity on mobile for better performance */
+    .floating-particles,
+    .gradient-orbs {
+        display: none;
+    }
+
+    /* Simplify shadows on mobile */
+    .glass-panel {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(10px);
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        max-width: calc(100vw - 1rem);
+    }
+
+    /* Optimize text sizes */
+    .text-4xl {
+        font-size: 2rem !important;
+        line-height: 1.2 !important;
+    }
+
+    .text-3xl {
+        font-size: 1.75rem !important;
+        line-height: 1.2 !important;
+    }
+
+    .text-2xl {
+        font-size: 1.5rem !important;
+        line-height: 1.3 !important;
+    }
+
+    /* Touch-friendly spacing */
+    .space-y-2 > * + * {
+        margin-top: 0.75rem;
+    }
+
+    .space-y-3 > * + * {
+        margin-top: 1rem;
+    }
+
+    .space-y-4 > * + * {
+        margin-top: 1.25rem;
+    }
+
+    /* Mobile-specific button styles */
+    .neumorphic-btn {
+        font-size: 0.875rem;
+        padding: 0.75rem 1.25rem;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+        word-wrap: break-word;
+    }
+
+    /* Mobile hero adjustments */
+    .min-h-screen {
+        min-height: 100vh;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    /* Mobile product grid */
+    .product-card {
+        margin-bottom: 1rem;
+        max-width: 100%;
+    }
+
+    /* Mobile modal adjustments */
+    .glass-panel {
+        margin: 0.25rem;
+        max-height: calc(100vh - 0.5rem);
+        max-width: calc(100vw - 0.5rem);
+    }
+
+    /* Mobile footer adjustments */
+    .neumorphic-footer {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    /* Mobile swiper adjustments */
+    .swiper-pagination {
+        bottom: 10px !important;
+    }
+
+    .swiper-pagination-bullet {
+        width: 8px;
+        height: 8px;
+        margin: 0 4px;
+    }
+
+    /* Prevent text overflow */
+    h1, h2, h3, h4, h5, h6, p, span, div {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+        max-width: 100%;
+    }
+
+    /* Flex container fixes */
+    .flex {
+        flex-wrap: wrap;
+        max-width: 100%;
+    }
+
+    .flex-row {
+        flex-direction: column;
+    }
+
+    /* Grid fixes */
+    .grid {
+        max-width: 100%;
+    }
+
+    /* Input fixes */
+    input, select, textarea {
+        max-width: 100%;
+        min-width: 0;
+    }
+}
+
+/* Tablet specific optimizations */
+@media (min-width: 481px) and (max-width: 768px) {
+    /* Tablet-specific adjustments */
+    .container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .neumorphic-btn {
+        font-size: 0.9rem;
+        padding: 0.875rem 1.75rem;
+    }
+
+    .text-4xl {
+        font-size: 2.25rem !important;
+    }
+
+    .text-3xl {
+        font-size: 1.875rem !important;
+    }
+}
+
+/* Performance optimizations for all devices */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .floating-particles,
+    .gradient-orbs {
+        display: none;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .neumorphic-btn,
+    .neumorphic-card,
+    .glass-panel {
+        border: 2px solid rgba(236, 72, 153, 0.8);
+    }
+
+    .text-gray-400 {
+        color: #d1d5db !important;
+    }
+
+    .text-gray-300 {
+        color: #e5e7eb !important;
+    }
+}
+
+/* Dark mode specific optimizations */
+@media (prefers-color-scheme: dark) {
+    :root {
+        color-scheme: dark;
+    }
+}
+
+/* Specific breakpoint fixes for common screen sizes */
+@media (max-width: 320px) {
+    .container {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+
+    .glass-panel {
+        margin-left: 0.25rem;
+        margin-right: 0.25rem;
+        max-width: calc(100vw - 0.5rem);
+    }
+
+    .neumorphic-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+    }
+
+    .text-3xl {
+        font-size: 1.5rem !important;
+    }
+
+    .text-2xl {
+        font-size: 1.25rem !important;
+    }
+}
+
+@media (min-width: 321px) and (max-width: 375px) {
+    .container {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+    }
+}
+
+@media (min-width: 376px) and (max-width: 414px) {
+    .container {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+}
+
+/* Landscape phone fixes */
+@media (max-height: 500px) and (orientation: landscape) {
+    .min-h-screen {
+        min-height: 100vh;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .hero-section {
+        padding-top: 5rem;
+    }
+}
+
+/* Ultra-wide screen fixes */
+@media (min-width: 1920px) {
+    .container {
+        max-width: 1800px;
+    }
+}
+
+/* Print styles */
+@media print {
+    * {
+        overflow: visible !important;
+        max-width: none !important;
+    }
+
+    .fixed {
+        position: static !important;
+    }
+
+    .hidden {
+        display: none !important;
+    }
 }

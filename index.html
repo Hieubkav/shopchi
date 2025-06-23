@@ -45,7 +45,7 @@
         }
     </script>
 </head>
-<body class="bg-dark text-white font-sans overflow-x-hidden relative">
+<body class="bg-dark text-white font-sans overflow-x-hidden relative max-w-full">
     <!-- Background Effects -->
     <div class="fixed inset-0 pointer-events-none z-0">
         <!-- Animated Background Particles -->
@@ -55,102 +55,114 @@
     </div>
 
     <!-- Footprint Container -->
-    <div id="footprintContainer" class="fixed inset-0 pointer-events-none z-10"></div>
+    <div id="footprintContainer" class="fixed inset-0 pointer-events-none z-40"></div>
     <!-- Header -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-dark/90 backdrop-blur-xl border-b border-pink-900/30 neumorphic-header">
-        <nav class="container mx-auto px-4 py-4">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
             <div class="flex items-center justify-between">
                 <!-- Logo -->
-                <div class="flex items-center space-x-3">
-                    <div class="w-12 h-12 rounded-lg overflow-hidden neumorphic-logo">
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg overflow-hidden neumorphic-logo">
                         <img src="https://scontent.fsgn5-9.fna.fbcdn.net/v/t39.30808-6/245367840_3033315620255790_5319637626483103583_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=AAKr75QBZykQ7kNvwFcTYlC&_nc_oc=AdlDiRS4coZMOHfVMjS1ExAl2e6AF8pIo-zIOF3HKuIF7lfuHMEyh4tS1-VtiSzidBo&_nc_zt=23&_nc_ht=scontent.fsgn5-9.fna&_nc_gid=JT55T0WCA1DGzbusUCBluw&oh=00_AfOTmEdSbjwRJjlgVw11jaZJ5V9fIo4uHVzOijhY8EvsFg&oe=685DBB13" alt="Shopchi Giày Dép" class="w-full h-full object-cover">
                     </div>
                     <div class="flex flex-col">
-                        <span class="text-xl font-bold text-primary">Shopchi</span>
-                        <span class="text-sm text-gray-400">Giày Dép</span>
+                        <span class="text-lg sm:text-xl font-bold text-primary">Shopchi</span>
+                        <span class="text-xs sm:text-sm text-gray-400">Giày Dép</span>
                     </div>
                 </div>
-                
+
                 <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#" class="hover:text-primary transition-colors">Trang chủ</a>
-                    <a href="#products" class="hover:text-primary transition-colors">Sản phẩm</a>
-                    <a href="#brands" class="hover:text-primary transition-colors">Thương hiệu</a>
-                    <a href="#sale" class="hover:text-primary transition-colors">Khuyến mãi</a>
-                    <a href="about.html" class="hover:text-primary transition-colors">Giới thiệu</a>
-                    <a href="contact.html" class="hover:text-primary transition-colors">Liên hệ</a>
+                <div class="hidden lg:flex items-center space-x-6 xl:space-x-8">
+                    <a href="#hero" class="hover:text-primary transition-colors text-sm xl:text-base">Trang chủ</a>
+                    <a href="#products" class="hover:text-primary transition-colors text-sm xl:text-base">Sản phẩm</a>
+                    <a href="#brands" class="hover:text-primary transition-colors text-sm xl:text-base">Thương hiệu</a>
+                    <a href="#products" class="hover:text-primary transition-colors text-sm xl:text-base">Khuyến mãi</a>
+                    <a href="#brands" class="hover:text-primary transition-colors text-sm xl:text-base">Giới thiệu</a>
+                    <a href="#newsletter" class="hover:text-primary transition-colors text-sm xl:text-base">Liên hệ</a>
                 </div>
-                
+
                 <!-- Utility Icons -->
-                <div class="flex items-center space-x-4">
-                    <button id="searchBtn" class="neumorphic-btn p-2 rounded-lg">
-                        <i class="fas fa-search"></i>
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <!-- Search Button - Hidden on mobile, shown on tablet+ -->
+                    <button id="searchBtn" class="hidden sm:flex neumorphic-btn p-2 rounded-lg">
+                        <i class="fas fa-search text-sm"></i>
                     </button>
+
+                    <!-- Wishlist Button -->
                     <button id="wishlistBtn" class="neumorphic-btn p-2 rounded-lg relative">
-                        <i class="fas fa-heart"></i>
-                        <span id="wishlistCount" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                        <i class="fas fa-heart text-sm"></i>
+                        <span id="wishlistCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center hidden text-xs">0</span>
                     </button>
+
+                    <!-- Cart Button -->
                     <button id="cartBtn" class="neumorphic-btn p-2 rounded-lg relative">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span id="cartCount" class="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                        <i class="fas fa-shopping-cart text-sm"></i>
+                        <span id="cartCount" class="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center hidden text-xs">0</span>
                     </button>
-                    <button id="mobileMenuBtn" class="md:hidden neumorphic-btn p-2 rounded-lg">
-                        <i class="fas fa-bars"></i>
+
+                    <!-- Mobile Search Button - Only on mobile -->
+                    <button id="mobileSearchBtn" class="sm:hidden neumorphic-btn p-2 rounded-lg">
+                        <i class="fas fa-search text-sm"></i>
+                    </button>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuBtn" class="lg:hidden neumorphic-btn p-2 rounded-lg">
+                        <i class="fas fa-bars text-sm"></i>
                     </button>
                 </div>
             </div>
-            
+
             <!-- Mobile Menu -->
-            <div id="mobileMenu" class="md:hidden mt-4 hidden">
-                <div class="glass-panel rounded-lg p-4 space-y-3">
-                    <a href="#" class="block hover:text-primary transition-colors">Trang chủ</a>
-                    <a href="#products" class="block hover:text-primary transition-colors">Sản phẩm</a>
-                    <a href="#brands" class="block hover:text-primary transition-colors">Thương hiệu</a>
-                    <a href="#sale" class="block hover:text-primary transition-colors">Khuyến mãi</a>
-                    <a href="about.html" class="block hover:text-primary transition-colors">Giới thiệu</a>
-                    <a href="contact.html" class="block hover:text-primary transition-colors">Liên hệ</a>
+            <div id="mobileMenu" class="lg:hidden mt-3 sm:mt-4 hidden">
+                <div class="glass-panel rounded-lg p-3 sm:p-4 space-y-2 sm:space-y-3">
+                    <a href="#hero" class="block hover:text-primary transition-colors py-2 text-sm sm:text-base">Trang chủ</a>
+                    <a href="#products" class="block hover:text-primary transition-colors py-2 text-sm sm:text-base">Sản phẩm</a>
+                    <a href="#brands" class="block hover:text-primary transition-colors py-2 text-sm sm:text-base">Thương hiệu</a>
+                    <a href="#products" class="block hover:text-primary transition-colors py-2 text-sm sm:text-base">Khuyến mãi</a>
+                    <a href="#brands" class="block hover:text-primary transition-colors py-2 text-sm sm:text-base">Giới thiệu</a>
+                    <a href="#newsletter" class="block hover:text-primary transition-colors py-2 text-sm sm:text-base">Liên hệ</a>
                 </div>
             </div>
         </nav>
     </header>
 
     <!-- Hero Section -->
-    <section class="pt-20 min-h-screen flex items-center relative overflow-hidden">
+    <section id="hero" class="pt-20 min-h-screen flex items-center relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20"></div>
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div data-aos="fade-right">
-                    <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div data-aos="fade-right" class="text-center lg:text-left order-2 lg:order-1">
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 leading-tight">
                         Bước đi <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">phong cách</span>
                     </h1>
-                    <p class="text-xl text-gray-300 mb-8">
+                    <p class="text-base sm:text-lg lg:text-xl text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto lg:mx-0">
                         Chuyên mua bán giày-dép thời trang cho mọi lứa tuổi với chất lượng cao và giá cả hợp lý.
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <button class="neumorphic-btn bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-lg font-semibold hover:shadow-lg transition-all">
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+                        <button class="neumorphic-btn bg-gradient-to-r from-primary to-secondary text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:shadow-lg transition-all text-sm sm:text-base">
                             Mua ngay
                         </button>
-                        <button class="neumorphic-btn border border-gray-600 px-8 py-4 rounded-lg font-semibold hover:border-primary transition-all">
+                        <button class="neumorphic-btn border border-gray-600 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:border-primary transition-all text-sm sm:text-base">
                             Xem bộ sưu tập
                         </button>
                     </div>
                 </div>
-                <div data-aos="fade-left" class="relative">
+                <div data-aos="fade-left" class="relative order-1 lg:order-2">
                     <div class="swiper heroSwiper">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <div class="neumorphic-card p-8 rounded-2xl">
-                                    <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500&h=500&fit=crop" alt="Giày thể thao" class="w-full h-80 object-cover rounded-lg">
+                                <div class="neumorphic-card p-4 sm:p-6 lg:p-8 rounded-2xl">
+                                    <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500&h=500&fit=crop" alt="Giày thể thao" class="w-full h-48 sm:h-64 lg:h-80 object-cover rounded-lg">
                                 </div>
                             </div>
                             <div class="swiper-slide">
-                                <div class="neumorphic-card p-8 rounded-2xl">
-                                    <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=500&h=500&fit=crop" alt="Giày cao gót" class="w-full h-80 object-cover rounded-lg">
+                                <div class="neumorphic-card p-4 sm:p-6 lg:p-8 rounded-2xl">
+                                    <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=500&h=500&fit=crop" alt="Giày cao gót" class="w-full h-48 sm:h-64 lg:h-80 object-cover rounded-lg">
                                 </div>
                             </div>
                             <div class="swiper-slide">
-                                <div class="neumorphic-card p-8 rounded-2xl">
-                                    <img src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=500&h=500&fit=crop" alt="Giày boot" class="w-full h-80 object-cover rounded-lg">
+                                <div class="neumorphic-card p-4 sm:p-6 lg:p-8 rounded-2xl">
+                                    <img src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=500&h=500&fit=crop" alt="Giày boot" class="w-full h-48 sm:h-64 lg:h-80 object-cover rounded-lg">
                                 </div>
                             </div>
                         </div>
@@ -170,24 +182,25 @@
             </div>
             
             <!-- Filter Bar -->
-            <div class="glass-panel rounded-lg p-6 mb-12" data-aos="fade-up">
-                <div class="flex flex-wrap items-center justify-between gap-4">
-                    <div class="flex flex-wrap gap-4">
-                        <select id="categoryFilter" class="neumorphic-input bg-dark-light border border-gray-600 rounded-lg px-4 py-2">
+            <div class="glass-panel rounded-lg p-4 sm:p-6 mb-8 sm:mb-12" data-aos="fade-up">
+                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                    <!-- Filter Controls -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 flex-1">
+                        <select id="categoryFilter" class="neumorphic-input bg-dark-light border border-gray-600 rounded-lg px-3 sm:px-4 py-2 text-sm sm:text-base w-full">
                             <option value="">Tất cả danh mục</option>
                             <option value="sneakers">Giày thể thao</option>
                             <option value="boots">Giày boot</option>
                             <option value="heels">Giày cao gót</option>
                             <option value="casual">Giày thường</option>
                         </select>
-                        <select id="brandFilter" class="neumorphic-input bg-dark-light border border-gray-600 rounded-lg px-4 py-2">
+                        <select id="brandFilter" class="neumorphic-input bg-dark-light border border-gray-600 rounded-lg px-3 sm:px-4 py-2 text-sm sm:text-base w-full">
                             <option value="">Tất cả thương hiệu</option>
                             <option value="nike">Nike</option>
                             <option value="adidas">Adidas</option>
                             <option value="puma">Puma</option>
                             <option value="converse">Converse</option>
                         </select>
-                        <select id="priceFilter" class="neumorphic-input bg-dark-light border border-gray-600 rounded-lg px-4 py-2">
+                        <select id="priceFilter" class="neumorphic-input bg-dark-light border border-gray-600 rounded-lg px-3 sm:px-4 py-2 text-sm sm:text-base w-full">
                             <option value="">Tất cả giá</option>
                             <option value="0-500000">Dưới 500k</option>
                             <option value="500000-1000000">500k - 1tr</option>
@@ -195,17 +208,19 @@
                             <option value="2000000-999999999">Trên 2tr</option>
                         </select>
                     </div>
-                    <div class="flex items-center gap-4">
-                        <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm..." class="neumorphic-input bg-dark-light border border-gray-600 rounded-lg px-4 py-2 w-64">
-                        <button id="clearFilters" class="neumorphic-btn px-4 py-2 rounded-lg text-sm">
-                            <i class="fas fa-times mr-2"></i>Xóa bộ lọc
+
+                    <!-- Search and Clear -->
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:flex-shrink-0 w-full lg:w-auto">
+                        <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm..." class="neumorphic-input bg-dark-light border border-gray-600 rounded-lg px-3 sm:px-4 py-2 text-sm sm:text-base w-full sm:w-48 lg:w-64 min-w-0">
+                        <button id="clearFilters" class="neumorphic-btn px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm whitespace-nowrap flex-shrink-0">
+                            <i class="fas fa-times mr-1 sm:mr-2"></i><span class="hidden sm:inline">Xóa bộ lọc</span><span class="sm:hidden">Xóa</span>
                         </button>
                     </div>
                 </div>
             </div>
-            
+
             <!-- Products Grid -->
-            <div id="productsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 sm:gap-6 lg:gap-8">
                 <!-- Products will be loaded here by JavaScript -->
             </div>
             
@@ -227,52 +242,54 @@
                 <p class="text-primary text-sm mt-2">📍 Ngai Giao, Vietnam</p>
             </div>
             
-            <div class="max-w-4xl mx-auto">
-                <div class="neumorphic-card p-12 rounded-2xl text-center brand-showcase" data-aos="fade-up">
-                    <div class="flex flex-col md:flex-row items-center gap-8">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6">
+                <div class="neumorphic-card p-6 sm:p-8 lg:p-12 rounded-2xl text-center brand-showcase" data-aos="fade-up">
+                    <div class="flex flex-col lg:flex-row items-center gap-6 sm:gap-8">
                         <!-- Logo lớn -->
                         <div class="flex-shrink-0">
-                            <div class="w-32 h-32 rounded-2xl overflow-hidden neumorphic-logo-large">
+                            <div class="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-2xl overflow-hidden neumorphic-logo-large">
                                 <img src="https://scontent.fsgn5-9.fna.fbcdn.net/v/t39.30808-6/245367840_3033315620255790_5319637626483103583_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=AAKr75QBZykQ7kNvwFcTYlC&_nc_oc=AdlDiRS4coZMOHfVMjS1ExAl2e6AF8pIo-zIOF3HKuIF7lfuHMEyh4tS1-VtiSzidBo&_nc_zt=23&_nc_ht=scontent.fsgn5-9.fna&_nc_gid=JT55T0WCA1DGzbusUCBluw&oh=00_AfOTmEdSbjwRJjlgVw11jaZJ5V9fIo4uHVzOijhY8EvsFg&oe=685DBB13" alt="Shopchi Giày Dép" class="w-full h-full object-cover">
                             </div>
                         </div>
 
                         <!-- Thông tin -->
-                        <div class="flex-1 text-left">
-                            <h3 class="text-4xl font-bold text-primary mb-4">Shopchi Giày Dép</h3>
-                            <p class="text-xl text-gray-300 mb-4">Chuyên mua bán giày-dép thời trang cho mọi lứa tuổi</p>
-                            <div class="space-y-3">
-                                <div class="flex items-center gap-3">
-                                    <i class="fas fa-map-marker-alt text-primary"></i>
-                                    <span class="text-gray-300">Ngai Giao, Vietnam</span>
+                        <div class="flex-1 text-center lg:text-left">
+                            <h3 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-3 sm:mb-4">Shopchi Giày Dép</h3>
+                            <p class="text-base sm:text-lg lg:text-xl text-gray-300 mb-4 sm:mb-6">Chuyên mua bán giày-dép thời trang cho mọi lứa tuổi</p>
+
+                            <!-- Features Grid -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6">
+                                <div class="flex items-center justify-center lg:justify-start gap-3">
+                                    <i class="fas fa-map-marker-alt text-primary text-sm sm:text-base"></i>
+                                    <span class="text-gray-300 text-sm sm:text-base">Ngai Giao, Vietnam</span>
                                 </div>
-                                <div class="flex items-center gap-3">
-                                    <i class="fas fa-shoe-prints text-primary"></i>
-                                    <span class="text-gray-300">Giày dép chất lượng cao</span>
+                                <div class="flex items-center justify-center lg:justify-start gap-3">
+                                    <i class="fas fa-shoe-prints text-primary text-sm sm:text-base"></i>
+                                    <span class="text-gray-300 text-sm sm:text-base">Giày dép chất lượng cao</span>
                                 </div>
-                                <div class="flex items-center gap-3">
-                                    <i class="fas fa-users text-primary"></i>
-                                    <span class="text-gray-300">Phục vụ mọi lứa tuổi</span>
+                                <div class="flex items-center justify-center lg:justify-start gap-3">
+                                    <i class="fas fa-users text-primary text-sm sm:text-base"></i>
+                                    <span class="text-gray-300 text-sm sm:text-base">Phục vụ mọi lứa tuổi</span>
                                 </div>
-                                <div class="flex items-center gap-3">
-                                    <i class="fas fa-heart text-primary"></i>
-                                    <span class="text-gray-300">Uy tín - Chất lượng - Giá tốt</span>
+                                <div class="flex items-center justify-center lg:justify-start gap-3">
+                                    <i class="fas fa-heart text-primary text-sm sm:text-base"></i>
+                                    <span class="text-gray-300 text-sm sm:text-base">Uy tín - Chất lượng - Giá tốt</span>
                                 </div>
                             </div>
 
                             <!-- Social Links -->
-                            <div class="flex gap-4 mt-6">
-                                <a href="https://www.facebook.com/shopchi.giay.dep" target="_blank" rel="noopener noreferrer" class="neumorphic-btn p-3 rounded-lg hover:text-blue-400 transition-colors" title="Facebook Shopchi Giày Dép">
-                                    <i class="fab fa-facebook-f"></i>
+                            <div class="flex justify-center lg:justify-start gap-3 sm:gap-4">
+                                <a href="https://www.facebook.com/shopchi.giay.dep" target="_blank" rel="noopener noreferrer" class="neumorphic-btn p-2 sm:p-3 rounded-lg hover:text-blue-400 transition-colors" title="Facebook Shopchi Giày Dép">
+                                    <i class="fab fa-facebook-f text-sm sm:text-base"></i>
                                 </a>
-                                <a href="#" class="neumorphic-btn p-3 rounded-lg hover:text-pink-400 transition-colors" title="Instagram">
-                                    <i class="fab fa-instagram"></i>
+                                <a href="#" class="neumorphic-btn p-2 sm:p-3 rounded-lg hover:text-pink-400 transition-colors" title="Instagram">
+                                    <i class="fab fa-instagram text-sm sm:text-base"></i>
                                 </a>
-                                <a href="tel:+84" class="neumorphic-btn p-3 rounded-lg hover:text-green-400 transition-colors" title="Gọi điện">
-                                    <i class="fas fa-phone"></i>
+                                <a href="tel:+84" class="neumorphic-btn p-2 sm:p-3 rounded-lg hover:text-green-400 transition-colors" title="Gọi điện">
+                                    <i class="fas fa-phone text-sm sm:text-base"></i>
                                 </a>
-                                <a href="#" class="neumorphic-btn p-3 rounded-lg hover:text-blue-500 transition-colors" title="Zalo">
-                                    <i class="fab fa-whatsapp"></i>
+                                <a href="#" class="neumorphic-btn p-2 sm:p-3 rounded-lg hover:text-blue-500 transition-colors" title="Zalo">
+                                    <i class="fab fa-whatsapp text-sm sm:text-base"></i>
                                 </a>
                             </div>
                         </div>
@@ -283,14 +300,14 @@
     </section>
 
     <!-- Newsletter -->
-    <section class="py-20">
-        <div class="container mx-auto px-4">
-            <div class="glass-panel rounded-2xl p-12 text-center" data-aos="fade-up">
-                <h2 class="text-3xl font-bold mb-4">Đăng ký nhận tin</h2>
-                <p class="text-gray-400 mb-8">Nhận thông tin về sản phẩm mới và ưu đãi đặc biệt</p>
-                <div class="max-w-md mx-auto flex gap-4">
-                    <input type="email" placeholder="Email của bạn" class="neumorphic-input flex-1 bg-dark-light border border-gray-600 rounded-lg px-4 py-3">
-                    <button class="neumorphic-btn bg-gradient-to-r from-primary to-secondary text-white px-6 py-3 rounded-lg font-semibold">
+    <section id="newsletter" class="py-12 sm:py-16 lg:py-20">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel rounded-2xl p-6 sm:p-8 lg:p-12 text-center" data-aos="fade-up">
+                <h2 class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Đăng ký nhận tin</h2>
+                <p class="text-gray-400 mb-6 sm:mb-8 text-sm sm:text-base">Nhận thông tin về sản phẩm mới và ưu đãi đặc biệt</p>
+                <div class="max-w-md mx-auto flex flex-col sm:flex-row gap-3 sm:gap-4 w-full">
+                    <input type="email" placeholder="Email của bạn" class="neumorphic-input flex-1 bg-dark-light border border-gray-600 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base w-full min-w-0">
+                    <button class="neumorphic-btn bg-gradient-to-r from-primary to-secondary text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold text-sm sm:text-base whitespace-nowrap flex-shrink-0">
                         Đăng ký
                     </button>
                 </div>
@@ -299,81 +316,90 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark-light py-12 border-t border-pink-900/50 relative z-20 neumorphic-footer">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div>
-                    <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-10 h-10 rounded-lg overflow-hidden neumorphic-logo">
+    <footer class="bg-dark-light py-8 sm:py-12 border-t border-pink-900/50 relative z-20 neumorphic-footer">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+                <!-- Brand Info -->
+                <div class="text-center sm:text-left lg:col-span-1">
+                    <div class="flex items-center justify-center sm:justify-start space-x-3 mb-4">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg overflow-hidden neumorphic-logo">
                             <img src="https://scontent.fsgn5-9.fna.fbcdn.net/v/t39.30808-6/245367840_3033315620255790_5319637626483103583_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=AAKr75QBZykQ7kNvwFcTYlC&_nc_oc=AdlDiRS4coZMOHfVMjS1ExAl2e6AF8pIo-zIOF3HKuIF7lfuHMEyh4tS1-VtiSzidBo&_nc_zt=23&_nc_ht=scontent.fsgn5-9.fna&_nc_gid=JT55T0WCA1DGzbusUCBluw&oh=00_AfOTmEdSbjwRJjlgVw11jaZJ5V9fIo4uHVzOijhY8EvsFg&oe=685DBB13" alt="Shopchi Giày Dép" class="w-full h-full object-cover">
                         </div>
                         <div class="flex flex-col">
-                            <span class="text-lg font-bold text-primary">Shopchi</span>
-                            <span class="text-sm text-gray-400">Giày Dép</span>
+                            <span class="text-base sm:text-lg font-bold text-primary">Shopchi</span>
+                            <span class="text-xs sm:text-sm text-gray-400">Giày Dép</span>
                         </div>
                     </div>
-                    <p class="text-gray-400">Chuyên mua bán giày-dép thời trang cho mọi lứa tuổi tại Ngai Giao, Vietnam. Uy tín - Chất lượng - Giá tốt.</p>
+                    <p class="text-gray-400 text-sm sm:text-base">Chuyên mua bán giày-dép thời trang cho mọi lứa tuổi tại Ngai Giao, Vietnam. Uy tín - Chất lượng - Giá tốt.</p>
                 </div>
-                <div>
-                    <h3 class="font-semibold mb-4">Liên kết</h3>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-primary transition-colors">Trang chủ</a></li>
+
+                <!-- Quick Links -->
+                <div class="text-center sm:text-left">
+                    <h3 class="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Liên kết</h3>
+                    <ul class="space-y-2 text-gray-400 text-sm sm:text-base">
+                        <li><a href="#hero" class="hover:text-primary transition-colors">Trang chủ</a></li>
                         <li><a href="#products" class="hover:text-primary transition-colors">Sản phẩm</a></li>
-                        <li><a href="about.html" class="hover:text-primary transition-colors">Giới thiệu</a></li>
-                        <li><a href="contact.html" class="hover:text-primary transition-colors">Liên hệ</a></li>
+                        <li><a href="#brands" class="hover:text-primary transition-colors">Giới thiệu</a></li>
+                        <li><a href="#newsletter" class="hover:text-primary transition-colors">Liên hệ</a></li>
                     </ul>
                 </div>
-                <div>
-                    <h3 class="font-semibold mb-4">Hỗ trợ</h3>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-primary transition-colors">Chính sách bảo hành</a></li>
-                        <li><a href="#" class="hover:text-primary transition-colors">Hướng dẫn đổi trả</a></li>
-                        <li><a href="#" class="hover:text-primary transition-colors">Câu hỏi thường gặp</a></li>
-                        <li><a href="#" class="hover:text-primary transition-colors">Chính sách bảo mật</a></li>
+
+                <!-- Support -->
+                <div class="text-center sm:text-left">
+                    <h3 class="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Hỗ trợ</h3>
+                    <ul class="space-y-2 text-gray-400 text-sm sm:text-base">
+                        <li><a href="#brands" class="hover:text-primary transition-colors">Chính sách bảo hành</a></li>
+                        <li><a href="#brands" class="hover:text-primary transition-colors">Hướng dẫn đổi trả</a></li>
+                        <li><a href="#newsletter" class="hover:text-primary transition-colors">Câu hỏi thường gặp</a></li>
+                        <li><a href="#newsletter" class="hover:text-primary transition-colors">Chính sách bảo mật</a></li>
                     </ul>
                 </div>
-                <div>
-                    <h3 class="font-semibold mb-4">Theo dõi chúng tôi</h3>
-                    <div class="flex space-x-4">
-                        <a href="https://www.facebook.com/shopchi.giay.dep" target="_blank" rel="noopener noreferrer" class="neumorphic-btn p-3 rounded-lg hover:text-blue-400 transition-colors" title="Facebook Shopchi Giày Dép">
-                            <i class="fab fa-facebook-f"></i>
+
+                <!-- Social Media -->
+                <div class="text-center sm:text-left">
+                    <h3 class="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Theo dõi chúng tôi</h3>
+                    <div class="flex justify-center sm:justify-start space-x-3 sm:space-x-4">
+                        <a href="https://www.facebook.com/shopchi.giay.dep" target="_blank" rel="noopener noreferrer" class="neumorphic-btn p-2 sm:p-3 rounded-lg hover:text-blue-400 transition-colors" title="Facebook Shopchi Giày Dép">
+                            <i class="fab fa-facebook-f text-sm sm:text-base"></i>
                         </a>
-                        <a href="#" class="neumorphic-btn p-3 rounded-lg hover:text-pink-400 transition-colors" title="Instagram">
-                            <i class="fab fa-instagram"></i>
+                        <a href="#" class="neumorphic-btn p-2 sm:p-3 rounded-lg hover:text-pink-400 transition-colors" title="Instagram">
+                            <i class="fab fa-instagram text-sm sm:text-base"></i>
                         </a>
-                        <a href="tel:+84" class="neumorphic-btn p-3 rounded-lg hover:text-green-400 transition-colors" title="Gọi điện">
-                            <i class="fas fa-phone"></i>
+                        <a href="tel:+84" class="neumorphic-btn p-2 sm:p-3 rounded-lg hover:text-green-400 transition-colors" title="Gọi điện">
+                            <i class="fas fa-phone text-sm sm:text-base"></i>
                         </a>
-                        <a href="#" class="neumorphic-btn p-3 rounded-lg hover:text-blue-500 transition-colors" title="Zalo">
-                            <i class="fab fa-whatsapp"></i>
+                        <a href="#" class="neumorphic-btn p-2 sm:p-3 rounded-lg hover:text-blue-500 transition-colors" title="Zalo">
+                            <i class="fab fa-whatsapp text-sm sm:text-base"></i>
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2024 Shopchi Giày Dép. Tất cả quyền được bảo lưu.</p>
+
+            <!-- Copyright -->
+            <div class="border-t border-gray-800 mt-6 sm:mt-8 pt-6 sm:pt-8 text-center text-gray-400">
+                <p class="text-xs sm:text-sm">&copy; 2024 Shopchi Giày Dép. Tất cả quyền được bảo lưu.</p>
             </div>
         </div>
     </footer>
 
     <!-- Cart Sidebar -->
-    <div id="cartSidebar" class="fixed top-0 right-0 h-full w-96 bg-dark/95 backdrop-blur-md transform translate-x-full transition-transform duration-300 z-50 border-l border-gray-800">
-        <div class="p-6 h-full flex flex-col">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-xl font-bold">Giỏ hàng</h2>
+    <div id="cartSidebar" class="fixed top-0 right-0 h-full w-full sm:w-96 bg-dark/95 backdrop-blur-md transform translate-x-full transition-transform duration-300 z-50 border-l border-gray-800">
+        <div class="p-4 sm:p-6 h-full flex flex-col">
+            <div class="flex items-center justify-between mb-4 sm:mb-6">
+                <h2 class="text-lg sm:text-xl font-bold">Giỏ hàng</h2>
                 <button id="closeCartBtn" class="neumorphic-btn p-2 rounded-lg">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            <div id="cartItems" class="flex-1 overflow-y-auto space-y-4">
+            <div id="cartItems" class="flex-1 overflow-y-auto space-y-3 sm:space-y-4">
                 <!-- Cart items will be loaded here -->
             </div>
             <div class="border-t border-gray-800 pt-4">
                 <div class="flex justify-between items-center mb-4">
-                    <span class="text-lg font-semibold">Tổng cộng:</span>
-                    <span id="cartTotal" class="text-xl font-bold text-primary">0đ</span>
+                    <span class="text-base sm:text-lg font-semibold">Tổng cộng:</span>
+                    <span id="cartTotal" class="text-lg sm:text-xl font-bold text-primary">0đ</span>
                 </div>
-                <button id="checkoutBtn" class="w-full neumorphic-btn bg-gradient-to-r from-primary to-secondary text-white py-3 rounded-lg font-semibold">
+                <button id="checkoutBtn" class="w-full neumorphic-btn bg-gradient-to-r from-primary to-secondary text-white py-3 rounded-lg font-semibold text-sm sm:text-base">
                     Thanh toán
                 </button>
             </div>
@@ -381,11 +407,11 @@
     </div>
 
     <!-- Product Modal -->
-    <div id="productModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
-        <div class="glass-panel rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            <div class="p-6">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-bold">Chi tiết sản phẩm</h2>
+    <div id="productModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50 flex items-center justify-center p-2 sm:p-4">
+        <div class="glass-panel rounded-2xl max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
+            <div class="p-4 sm:p-6">
+                <div class="flex justify-between items-center mb-4 sm:mb-6">
+                    <h2 class="text-lg sm:text-2xl font-bold">Chi tiết sản phẩm</h2>
                     <button id="closeModalBtn" class="neumorphic-btn p-2 rounded-lg">
                         <i class="fas fa-times"></i>
                     </button>
@@ -398,16 +424,16 @@
     </div>
 
     <!-- Search Modal -->
-    <div id="searchModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
-        <div class="glass-panel rounded-2xl max-w-2xl w-full">
-            <div class="p-6">
-                <div class="flex items-center gap-4 mb-6">
-                    <input type="text" id="modalSearchInput" placeholder="Tìm kiếm sản phẩm..." class="flex-1 neumorphic-input bg-dark-light border border-gray-600 rounded-lg px-4 py-3">
-                    <button id="closeSearchBtn" class="neumorphic-btn p-3 rounded-lg">
+    <div id="searchModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50 flex items-center justify-center p-2 sm:p-4">
+        <div class="glass-panel rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden">
+            <div class="p-4 sm:p-6">
+                <div class="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+                    <input type="text" id="modalSearchInput" placeholder="Tìm kiếm sản phẩm..." class="flex-1 neumorphic-input bg-dark-light border border-gray-600 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base">
+                    <button id="closeSearchBtn" class="neumorphic-btn p-2 sm:p-3 rounded-lg">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
-                <div id="searchResults" class="space-y-4 max-h-96 overflow-y-auto">
+                <div id="searchResults" class="space-y-3 sm:space-y-4 max-h-96 overflow-y-auto">
                     <!-- Search results will be loaded here -->
                 </div>
             </div>
@@ -426,6 +452,99 @@
     <div id="toastContainer" class="fixed top-20 right-4 z-50 space-y-2">
         <!-- Toast notifications will be added here -->
     </div>
+
+
+
+    <script>
+
+        // Simple click handler for footprint
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 DOM loaded, adding click listener...');
+
+            document.addEventListener('click', function(e) {
+                // Skip buttons
+                if (e.target.tagName === 'BUTTON' || e.target.closest('button')) {
+                    return;
+                }
+
+                console.log('👆 Click detected at:', e.clientX, e.clientY);
+
+                const footprint = document.createElement('div');
+                footprint.innerHTML = '👟';
+
+
+                const shoes = ['👟', '👠', '🥿', '👞', '�'];
+                footprint.innerHTML = shoes[Math.floor(Math.random() * shoes.length)];
+
+                footprint.style.cssText = `
+                    position: fixed !important;
+                    left: ${e.clientX - 16}px !important;
+                    top: ${e.clientY - 16}px !important;
+                    width: 32px !important;
+                    height: 32px !important;
+                    background: rgba(236, 72, 153, 0.08) !important;
+                    border: 1px solid rgba(236, 72, 153, 0.2) !important;
+                    border-radius: 50% !important;
+                    z-index: 999999 !important;
+                    font-size: 16px !important;
+                    display: flex !important;
+                    align-items: center !important;
+                    justify-content: center !important;
+                    color: #ec4899 !important;
+                    text-shadow: 0 0 6px rgba(236, 72, 153, 0.4) !important;
+                    box-shadow: 0 0 12px rgba(236, 72, 153, 0.2) !important;
+                    animation: shoeGlow 2s ease-out forwards !important;
+                    pointer-events: none !important;
+                    backdrop-filter: blur(2px) !important;
+                    transform: rotate(${Math.random() * 30 - 15}deg) !important;
+                `;
+
+                document.body.appendChild(footprint);
+
+                setTimeout(() => {
+                    if (footprint.parentNode) {
+                        document.body.removeChild(footprint);
+                    }
+                }, 2000);
+
+                console.log('✅ Footprint created at click position');
+            });
+
+            console.log('✅ Click listener added successfully');
+        });
+    </script>
+
+    <style>
+        @keyframes testPulse {
+            0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+            15% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; }
+            85% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+            100% { transform: translate(-50%, -50%) scale(0.9); opacity: 0; }
+        }
+
+        @keyframes shoeGlow {
+            0% {
+                transform: scale(0.3);
+                opacity: 0;
+                box-shadow: 0 0 5px rgba(236, 72, 153, 0.1);
+            }
+            20% {
+                transform: scale(1.1);
+                opacity: 0.9;
+                box-shadow: 0 0 20px rgba(236, 72, 153, 0.4);
+            }
+            80% {
+                transform: scale(1);
+                opacity: 0.7;
+                box-shadow: 0 0 15px rgba(236, 72, 153, 0.3);
+            }
+            100% {
+                transform: scale(0.8);
+                opacity: 0;
+                box-shadow: 0 0 8px rgba(236, 72, 153, 0.1);
+            }
+        }
+    </style>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>

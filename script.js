@@ -162,6 +162,9 @@ document.addEventListener('DOMContentLoaded', function() {
     updateWishlistUI();
     initializeFootprintEffect();
     createFloatingParticles();
+
+    // Debug: Test footprint effect
+    console.log('Footprint effect initialized. Click anywhere on the page to see footprints!');
 });
 
 // Initialize App Components
@@ -198,39 +201,77 @@ function initializeApp() {
 function setupEventListeners() {
     // Mobile Menu
     document.getElementById('mobileMenuBtn').addEventListener('click', toggleMobileMenu);
-    
+
+    // Mobile Search Button
+    const mobileSearchBtn = document.getElementById('mobileSearchBtn');
+    if (mobileSearchBtn) {
+        mobileSearchBtn.addEventListener('click', toggleSearchModal);
+    }
+
     // Cart
     document.getElementById('cartBtn').addEventListener('click', toggleCart);
     document.getElementById('closeCartBtn').addEventListener('click', toggleCart);
-    
+
     // Search
     document.getElementById('searchBtn').addEventListener('click', toggleSearchModal);
     document.getElementById('closeSearchBtn').addEventListener('click', toggleSearchModal);
     document.getElementById('searchInput').addEventListener('input', handleSearch);
     document.getElementById('modalSearchInput').addEventListener('input', handleModalSearch);
-    
+
     // Filters
     document.getElementById('categoryFilter').addEventListener('change', applyFilters);
     document.getElementById('brandFilter').addEventListener('change', applyFilters);
     document.getElementById('priceFilter').addEventListener('change', applyFilters);
     document.getElementById('clearFilters').addEventListener('click', clearFilters);
-    
+
     // Product Modal
     document.getElementById('closeModalBtn').addEventListener('click', closeProductModal);
-    
+
     // Load More
     document.getElementById('loadMoreBtn').addEventListener('click', loadMoreProducts);
-    
+
     // Checkout
     document.getElementById('checkoutBtn').addEventListener('click', handleCheckout);
-    
+
     // Close modals on outside click
     document.getElementById('productModal').addEventListener('click', function(e) {
         if (e.target === this) closeProductModal();
     });
-    
+
     document.getElementById('searchModal').addEventListener('click', function(e) {
         if (e.target === this) toggleSearchModal();
+    });
+
+    // Smooth scrolling for navigation links
+    setupSmoothScrolling();
+}
+
+// Smooth Scrolling Setup
+function setupSmoothScrolling() {
+    // Get all navigation links
+    const navLinks = document.querySelectorAll('a[href^="#"]');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+                // Close mobile menu if open
+                const mobileMenu = document.getElementById('mobileMenu');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+
+                // Smooth scroll to target
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
     });
 }
 
@@ -238,6 +279,11 @@ function setupEventListeners() {
 function toggleMobileMenu() {
     const mobileMenu = document.getElementById('mobileMenu');
     mobileMenu.classList.toggle('hidden');
+
+    // Add animation class
+    if (!mobileMenu.classList.contains('hidden')) {
+        mobileMenu.classList.add('slide-in-left');
+    }
 }
 
 // Cart Functions
@@ -744,44 +790,172 @@ function handleCheckout() {
 
 // Footprint Effect
 function initializeFootprintEffect() {
-    const footprintContainer = document.getElementById('footprintContainer');
-    let footprintCount = 0;
-    const maxFootprints = 20;
+    console.log('🦶 Initializing footprint effect...');
 
-    // Add click/touch event listeners
-    document.addEventListener('click', createFootprint);
-    document.addEventListener('touchstart', createFootprint);
+    const footprintContainer = document.getElementById('footprintContainer');
+    if (!footprintContainer) {
+        console.error('❌ Footprint container not found!');
+        return;
+    }
+
+    console.log('✅ Footprint container found:', footprintContainer);
+
+    let footprintCount = 0;
+    const maxFootprints = 15;
+
+    // Add click/touch event listeners to document
+    document.addEventListener('click', createFootprint, false);
+    document.addEventListener('touchstart', createFootprint, false);
+
+    console.log('✅ Event listeners added for footprint effect');
 
     function createFootprint(e) {
+        console.log('🖱️ Click detected at:', e.clientX, e.clientY);
+
+        // Skip if clicking on interactive elements
+        const target = e.target;
+        if (target.tagName === 'BUTTON' ||
+            target.tagName === 'A' ||
+            target.tagName === 'INPUT' ||
+            target.tagName === 'SELECT' ||
+            target.closest('button') ||
+            target.closest('a') ||
+            target.closest('.neumorphic-btn')) {
+            console.log('⏭️ Skipping interactive element:', target.tagName);
+            return;
+        }
+
         // Prevent too many footprints
-        if (footprintCount >= maxFootprints) return;
+        if (footprintCount >= maxFootprints) {
+            console.log('⚠️ Max footprints reached');
+            return;
+        }
+
+        console.log('🦶 Creating footprint...');
 
         const footprint = document.createElement('div');
-        footprint.className = 'footprint';
+
+        // Create a simple, highly visible footprint
+        footprint.innerHTML = '🦶';
+
+        // Apply all styles inline to ensure visibility
+        footprint.style.cssText = `
+            position: fixed !important;
+            left: ${x - 25}px !important;
+            top: ${y - 25}px !important;
+            width: 50px !important;
+            height: 50px !important;
+            background: #ec4899 !important;
+            border: 3px solid #f472b6 !important;
+            border-radius: 50% !important;
+            z-index: 99999 !important;
+            pointer-events: none !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-size: 30px !important;
+            color: white !important;
+            text-shadow: 0 0 10px rgba(0,0,0,0.8) !important;
+            box-shadow: 0 0 30px #ec4899, 0 0 60px #f472b6 !important;
+            animation: footprintFade 3s ease-out forwards !important;
+            user-select: none !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        `;
 
         // Get click/touch position
-        const x = e.clientX || (e.touches && e.touches[0].clientX) || 0;
-        const y = e.clientY || (e.touches && e.touches[0].clientY) || 0;
+        let x, y;
+        if (e.type === 'touchstart' && e.touches && e.touches[0]) {
+            x = e.touches[0].clientX;
+            y = e.touches[0].clientY;
+        } else {
+            x = e.clientX;
+            y = e.clientY;
+        }
 
-        // Position footprint
-        footprint.style.left = (x - 15) + 'px';
-        footprint.style.top = (y - 20) + 'px';
+        // Update position in inline style
+        footprint.style.left = (x - 25) + 'px';
+        footprint.style.top = (y - 25) + 'px';
 
         // Add random rotation
-        const rotation = Math.random() * 60 - 30; // -30 to 30 degrees
-        footprint.style.transform = `rotate(${rotation}deg)`;
+        const rotation = Math.random() * 60 - 30;
+        const scale = 0.8 + Math.random() * 0.4;
+        footprint.style.transform = `rotate(${rotation}deg) scale(${scale})`;
 
-        footprintContainer.appendChild(footprint);
+        console.log('📍 Footprint positioned at:', x, y, 'with rotation:', rotation, 'scale:', scale);
+
+        // Add to body instead of container to avoid any conflicts
+        document.body.appendChild(footprint);
         footprintCount++;
+
+        console.log('✅ Footprint added to body! Total count:', footprintCount);
+        console.log('🔍 Footprint element:', footprint);
+        console.log('🔍 Footprint computed style:', window.getComputedStyle(footprint));
 
         // Remove footprint after animation
         setTimeout(() => {
-            if (footprint.parentNode) {
-                footprint.parentNode.removeChild(footprint);
+            if (footprint && footprint.parentNode) {
+                document.body.removeChild(footprint);
                 footprintCount--;
+                console.log('🗑️ Footprint removed. Remaining:', footprintCount);
             }
         }, 3000);
     }
+
+    // Test function - create a footprint at center of screen
+    window.testFootprint = function() {
+        console.log('🧪 Testing footprint at center...');
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+
+        const testEvent = {
+            clientX: centerX,
+            clientY: centerY,
+            target: document.body,
+            type: 'click'
+        };
+
+        createFootprint(testEvent);
+    };
+
+    // Simple test function that creates footprint directly
+    window.createTestFootprint = function() {
+        console.log('🧪 Creating direct test footprint...');
+
+        const footprint = document.createElement('div');
+        footprint.innerHTML = '🦶';
+        footprint.style.cssText = `
+            position: fixed !important;
+            left: 50% !important;
+            top: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            width: 80px !important;
+            height: 80px !important;
+            background: red !important;
+            border: 5px solid yellow !important;
+            border-radius: 50% !important;
+            z-index: 999999 !important;
+            font-size: 40px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            color: white !important;
+        `;
+
+        document.body.appendChild(footprint);
+
+        setTimeout(() => {
+            if (footprint.parentNode) {
+                document.body.removeChild(footprint);
+            }
+        }, 5000);
+
+        console.log('✅ Direct test footprint created!');
+    };
+
+    console.log('🧪 Test functions available:');
+    console.log('- window.testFootprint()');
+    console.log('- window.createTestFootprint()');
 }
 
 // Enhanced Floating Particles
